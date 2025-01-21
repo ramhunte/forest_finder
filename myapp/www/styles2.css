@@ -1,0 +1,70 @@
+
+
+/* styles.css */
+
+/* Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Englebert&display=swap');
+
+ /* #01796F 
+ /* #6B8E23
+ /* #355E3B
+ /* #4E5B31
+ /* #8A9A5B
+
+/* Change the navbar background to dark green and text to white */
+.navbar {
+    background-color: #355E3B !important; /* Dark Green */
+    border-color: #004d00; /* Slightly darker shade for the border */
+    font-family: 'Englebert', sans-serif; /* Apply Kranky font to the navbar */
+    line-height: 10px;
+    height: 25px; /* Ensure the navbar height remains the same */
+}
+
+/* Navbar text */
+.navbar .navbar-brand {
+  color: #ffffff !important; /* White text */
+  font-size: 36px; /* Larger font size for the brand/title */
+  padding-top: 30px; /* Add padding to lower the title text */
+
+}
+
+.navbar .navbar-nav > li > a {
+  color: #ffffff !important; /* White text */
+  font-size: 22px; /* Set font size for navbar links */
+    }
+
+.navbar-nav li a:hover, 
+.navbar-nav > .active > a {
+ color: #ffffff !important;
+  background-color:#01796F !important;  
+  background-image: none !important;
+}
+
+/* Move the zoom control buttons down */
+.leaflet-control-zoom {
+  top: 60px !important; /* Move down 60px from the top (adjust as needed) */
+}
+
+/* Absolute Panel */
+
+#controls {
+  /* Appearance */
+  background-color: #8A9A5B;
+  padding: 10px 20px 20px 10px;
+  cursor: move;
+  Fade out while not hovering */
+  opacity: 0.3;
+  zoom: 0.9;
+}
+
+#controls:hover {
+  /* Fade in while hovering */
+  opacity: 0.95;
+  transition-delay: 0;
+}
+
+.selected { 
+background-color:#01796F !important;
+color:#ffffff !important;
+  
+} 

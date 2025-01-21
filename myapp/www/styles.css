@@ -1,0 +1,123 @@
+
+/* styles.css */
+
+/* Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Englebert&display=swap');
+
+/* general tags */
+p, h1, h2, h3, h4, h5, h6 {
+    color: #4E2A1C; /* Dark brown color for headers */
+}
+
+body {
+      background-color: #E9E8D8; /* Light beige color */
+}
+
+/* Navbar */
+.navbar {
+    background-color: #355E3B !important; /* Dark Green */
+    border-color: #004d00; /* Slightly darker shade for the border */
+    font-family: 'Englebert', sans-serif; /* Apply Kranky font to the navbar */
+}
+
+/* Navbar title */
+.navbar .navbar-brand {
+  color: #ffffff !important; /* White text */
+  font-size: 28px; /* Larger font size for the brand/title */
+
+}
+
+/* Navbar text */
+.navbar .navbar-nav > li > a {
+  color: #ffffff !important; /* White text */
+  font-size: 18px; /* Set font size for navbar links */
+    }
+
+.navbar-nav li a:hover, 
+.navbar-nav > .active > a {
+ color: #ffffff !important;
+  background-color:#01796F !important;  
+  background-image: none !important;
+}
+
+/* Leaflet Button */
+.leaflet-control-zoom {
+  top: 60px !important; /* Move down 60px from the top (adjust as needed) */
+}
+
+/* Control Panel */
+#controls {
+  /* Appearance */
+  background-color: #E9E8D8;
+  border-color: #8A9A5B;
+  border-width: 3px;
+  padding: 10px 10px 10px 20px;
+  cursor: move;
+  zoom: 0.8;
+}
+
+/* Pickers */  
+#selectSpecies-label,
+#selectCounty-label,
+#toggleLegend {
+  color: #355E3B;
+  font-size: 26px;
+  font-family: 'Englebert', sans-serif;
+}
+
+/* dropdowns */
+.selectize-dropdown-content,
+.item,
+.filter-option-inner-inner,
+.dropdown-item {
+  color:#355E3B !important;
+  font-size: 18px;
+  font-family: 'Englebert', sans-serif;
+}
+
+.dropdown-menu {
+      max-width: 200px; /* Adjust this width */
+}
+
+.selected { 
+background-color:#01796F !important;
+color:#ffffff !important;
+  
+} 
+
+/* deselect/select all button */
+.btn-group-sm>.btn, .btn-sm {
+    padding: 10px 4px 6px 0px;
+    line-height: .5;
+}
+.bs-actionsbox .btn{
+    color: #355E3B;             /* Change text color if needed */
+    border-color: #355E3B;    /* Optional: Change border color */
+    background-color: #E9E8D8;
+    font-size: 18px;
+    font-family: 'Englebert', sans-serif;
+}
+
+  /* Legend toggle */  
+ .material-switch label {
+    cursor: pointer;
+    font-weight: 200;
+    color:#355E3B !important; 
+    font-size: 24px; 
+    font-family: 'Englebert', sans-serif;
+}   
+
+/* Apply Button */
+#applyFilters {
+  background-color:#01796F !important;
+  font-size: 26px;    /* Reduce the font size */
+  font-family: 'Englebert', sans-serif;
+  padding: 5px 5px;  /* Adjust padding (top-bottom, left-right) */
+  height: auto;       /* Let the height adjust to content */
+  width: auto;        /* Let the width adjust to content */
+  line-height: 1.2;   /* Adjust line height for better spacing */
+  border-radius: 5px; /* Optional: rounded corners */
+  color: #ffffff !important;  /* Set text color to white */
+  display: block; margin: 0 auto;
+}
+    
