@@ -5,7 +5,7 @@
 # Session Data files
 .RData
 .RDataTmp
-myapp/data/unused_data/
+myapp/data/
 
 # User-specific files
 .Ruserdata
