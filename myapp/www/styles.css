@@ -41,7 +41,7 @@ body {
 /* Navbar title container */
 .navbar>.container-fluid .navbar-brand {
   margin-left: -20px;
-  margin-right: -10px;
+  margin-right: 0px;
 }
 
 /* Navbar text */
@@ -158,5 +158,11 @@ color:#ffffff !important;
   border-color: #355E3B!important; 
 }
 
+/* in text code */
+
+code {
+  color: #01796F;
+  background-color: #ffffff;
+}
     
     
