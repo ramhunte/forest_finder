@@ -4,9 +4,19 @@
 /* Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Englebert&display=swap');
 
+@import url('https://fonts.googleapis.com/css2?family=Englebert&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+
 /* general tags */
-p, h1, h2, h3, h4, h5, h6 {
+p, h1, h2, h4, h5, h6 {
     color: #4E2A1C; /* Dark brown color for headers */
+    font-family: 'Montserrat', sans-serif;
+}
+
+h3 {
+  color: #355E3B; /* Dark brown color for headers */
+  font-family: 'Montserrat', sans-serif;
+  letter-spacing: 6px; /* Adjust the value as needed */
 }
 
 body {
@@ -17,14 +27,21 @@ body {
 .navbar {
     background-color: #355E3B !important; /* Dark Green */
     border-color: #004d00; /* Slightly darker shade for the border */
-    font-family: 'Englebert', sans-serif; /* Apply Kranky font to the navbar */
-}
+    font-family: 'Montserrat', sans-serif; /* Apply Kranky font to the navbar */
+} 
 
 /* Navbar title */
 .navbar .navbar-brand {
   color: #ffffff !important; /* White text */
   font-size: 28px; /* Larger font size for the brand/title */
+  font-family: 'Montserrat', sans-serif; /* Apply Kranky font to the navbar */
 
+}
+
+/* Navbar title container */
+.navbar>.container-fluid .navbar-brand {
+  margin-left: -20px;
+  margin-right: -10px;
 }
 
 /* Navbar text */
@@ -59,10 +76,12 @@ body {
 /* Pickers */  
 #selectSpecies-label,
 #selectCounty-label,
-#toggleLegend {
+#toggleLegend,
+#toggleRaster {
   color: #355E3B;
-  font-size: 26px;
-  font-family: 'Englebert', sans-serif;
+  font-size: 24px;
+  font-weight: 600;
+  font-family: 'Montserrat', sans-serif;
 }
 
 /* dropdowns */
@@ -72,7 +91,7 @@ body {
 .dropdown-item {
   color:#355E3B !important;
   font-size: 18px;
-  font-family: 'Englebert', sans-serif;
+  font-family: 'Montserrat', sans-serif;
 }
 
 .dropdown-menu {
@@ -87,7 +106,7 @@ color:#ffffff !important;
 
 /* deselect/select all button */
 .btn-group-sm>.btn, .btn-sm {
-    padding: 10px 4px 6px 0px;
+    padding: 7px 4px 6px 0px;
     line-height: .5;
 }
 .bs-actionsbox .btn{
@@ -95,29 +114,49 @@ color:#ffffff !important;
     border-color: #355E3B;    /* Optional: Change border color */
     background-color: #E9E8D8;
     font-size: 18px;
-    font-family: 'Englebert', sans-serif;
+    font-family: 'Montserrat', sans-serif;
 }
 
-  /* Legend toggle */  
+  /* Legend and Tree toggle label */  
  .material-switch label {
     cursor: pointer;
     font-weight: 200;
     color:#355E3B !important; 
     font-size: 24px; 
-    font-family: 'Englebert', sans-serif;
+    font-family: 'Montserrat', sans-serif;
 }   
+
+/* Legend and Tree toggle switch color */
+.label-success {
+   background-color:#355E3B
+}
 
 /* Apply Button */
 #applyFilters {
   background-color:#01796F !important;
-  font-size: 26px;    /* Reduce the font size */
-  font-family: 'Englebert', sans-serif;
-  padding: 5px 5px;  /* Adjust padding (top-bottom, left-right) */
+  font-size: 22px;    /* Reduce the font size */
+  font-family: 'Montserrat', sans-serif;
+  padding: 2px 4px;  /* Adjust padding (top-bottom, left-right) */
   height: auto;       /* Let the height adjust to content */
   width: auto;        /* Let the width adjust to content */
   line-height: 1.2;   /* Adjust line height for better spacing */
-  border-radius: 5px; /* Optional: rounded corners */
+  border-radius: 7px; /* Optional: rounded corners */
   color: #ffffff !important;  /* Set text color to white */
   display: block; margin: 0 auto;
 }
+
+/* x mark in checkbox */
+.pretty input:checked~.state.p-primary-o .icon {
+  color: #355E3B!important;
+  stroke: #355E3B!important;
+  
+}
+
+/* checkbox */
+.pretty input:checked~.state.p-primary-o label:after,
+.pretty .state.p-danger-o label:after { 
+  border-color: #355E3B!important; 
+}
+
+    
     

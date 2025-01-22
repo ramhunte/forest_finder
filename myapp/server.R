@@ -105,18 +105,31 @@ server <- function(input, output, session) {
     if (!is.null(cnty_rast())) {
 
       proxy <- proxy %>%
-        addRasterImage(cnty_rast(), opacity = 1, project = FALSE) |> 
+        addRasterImage(cnty_rast(), opacity = 1, project = FALSE, group = "Raster Layer") |> 
         addRasterLegend(
           cnty_rast(),
           opacity = 1,
           group = "Trees",
           position = "bottomleft"
-        )
-
+        ) 
     }
     
     shinyjs::hideElement(id = 'loading') # Hide the spinner
     
+  })
+  
+  # Observe raster toggle ----
+  # Observe the toggle button for raster visibility
+  observeEvent(input$toggleRaster, {
+    proxy <- leafletProxy("mapOutput")
+    
+    if (input$toggleRaster) {
+      # Show the raster layer by adding it to the map
+      proxy %>% showGroup("Raster Layer")
+    } else {
+      # Hide the raster layer by removing it from the map
+      proxy %>% hideGroup("Raster Layer")
+    }
   })
   
   # Observe legend toggle ----
@@ -141,7 +154,7 @@ server <- function(input, output, session) {
     }
   })
   
-  # toogle control ----
+  # toggle control ----
   observeEvent(input$toggleControls2, {
     if (input$toggleControls2) {
       runjs("$('#controls').removeClass('hidden');")  # Show controls

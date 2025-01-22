@@ -1,5 +1,6 @@
 
-### About this App
+
+### Welcome!
 
 Forest Finder is an app that allows individuals to dynamically explore forests 
 throughout California's 58 counties by tree species or groups. My original goal in making this 
@@ -13,6 +14,9 @@ to interact with wilderness. Forest Finder may grow, it may die, it may slowly e
 wasn't yesterday. Regardless of how you use it, I am always receptive to constructive feedback on how to improve the user 
 experience, so feel free to contact me if you have questions or suggestions. I hope that it can serve you well as it has for me.
 
+<br>
+
+
 ### How to use it
 
 Forest Finder was not designed to be complex in it's nature. As of now, there are two inputs you can use to filter
@@ -25,6 +29,17 @@ tree species and groups in that county.The map will populate a polygon of the se
 of the forest types within it. A legend will populate in the lower left hand corner that will link the tree species/groups to 
 the associated color on the map.
 
+<br>
+
+
+### Data
+
+
+Data was collected by [Riley et a. 2021](https://www.fs.usda.gov/rds/archive/catalog/RDS-2021-0074), and all rights to the collection, curation, and research are given to the original authors 
+Most counties retain their original 30mx30m resolution. However, larger rasters for heavily forested counties were resampled  to 60mx60m resolution to enhance the smoothness of the user 
+experience in the application at the cost of some species detail. To read further on the data, please see attached publication details on the USDA website [HERE](https://data.fs.usda.gov/geodata/rastergateway/treemap/index.php).
+
+<br> 
 
 ### Limitations
 
@@ -33,13 +48,6 @@ at the US Forest Service. It is not 100% accurate. There will be areas in real l
 versa. The data is robust enough to show broad patterns by county where you would typically find certain forested habitat.
 Furthermore, the app does not distinguish between private and public land. In many if not most cases, many of these forests
 will be on private land, so it is the users responsibility to land ownership prior to embarking on an adventure.
-
-### Data
-
-Data was collected by [Riley et a. 2021](https://www.fs.usda.gov/rds/archive/catalog/RDS-2021-0074), and all rights to the collection, curation, and research are given to the original authors 
-Most counties retain their original 30mx30m resolution. However, larger rasters for heavily forested counties were resampled  to 60mx60m resolution to enhance the smoothness of the user 
-experience in the application at the cost of some species detail. To read further on the data, please see attached publication details on the USDA website [HERE](https://data.fs.usda.gov/geodata/rastergateway/treemap/index.php).
-
 
 
 Citation:

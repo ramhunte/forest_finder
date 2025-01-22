@@ -3,20 +3,15 @@ ui <- navbarPage(
   title = "Forest Finder",
   id = "main_navbar",
   header = includeCSS('www/styles.css'),
-  useShinyjs(),
   
 
   # Map Page ----
   tabPanel(
+    useShinyjs(),
     title = "Interactive Map",
     div(
       style = "position: absolute; top: 0; bottom: 0; left: 0; right: 0; ", # Full viewport height and width
       leafletOutput(outputId = "mapOutput", width = "100%", height = "100%"),
-      
-      # Controls Panel
-      # actionButton("toggleControls", "Controls",
-      #              class = "btn btn-primary",
-      #              style = "position: absolute; top: 57px; right: 5px; z-index: 9999;"),
 
       # Loading Spinner
       shinyjs::hidden(div(
@@ -25,39 +20,46 @@ ui <- navbarPage(
         addSpinner(div(), spin = "circle", color = "#01796F")
       )),
       
-      absolutePanel(id = "controls", 
-                    class = "panel panel-default",
-                    fixed = TRUE, top = 110, left = "auto", right = 5, 
-                    bottom = "auto", width = 350, height = "auto",
-        
-        selectInput(
-          inputId = "selectCounty",
-          label = "County:",
-          choices = sort(unique(counties_ca$NAME)),
-          selected = NULL
-        ),
-        
-        pickerInput(
-          inputId = "selectSpecies",
-          label = "Species:",
-          choices = tree_levs$Label,
-          multiple = TRUE,
-          options = list(`actions-box` = TRUE)
-        ),
-        materialSwitch(inputId = "toggleLegend", "Legend",
-                       status = "success", value = TRUE),
-        # prettyCheckbox(inputId = "toggleLegend", label = "Hide Legend",  
-        #               icon = icon("check"), shape = "round", value = TRUE), # New buttonc
-        actionButton(inputId = "applyFilters", label = "Apply")
-        
-      )
+    absolutePanel(id = "controls",
+                  class = "panel panel-default",
+                  fixed = TRUE, top = 68, left = "auto", right = 5,
+                  bottom = "auto", width = 350, height = "auto",
+
+      pickerInput(
+        inputId = "selectCounty",
+        label = "County:",
+        choices = sort(unique(counties_ca$NAME)),
+        multiple = FALSE,
+        pickerOptions(maxOptionsText = 1)),
+
+      pickerInput(
+        inputId = "selectSpecies",
+        label = "Species:",
+        choices = tree_levs$Label,
+        multiple = TRUE,
+        options = list(`actions-box` = TRUE)
+      ),
+      materialSwitch(inputId = "toggleLegend", "Legend",
+                     status = "success", value = TRUE),
+      div(style = "padding-right: 23px;",
+        materialSwitch(inputId = "toggleRaster", "Trees  ",
+                     status = "success", value = TRUE)),
+      actionButton(inputId = "applyFilters", label = "Apply")
+
+    )
     ),
-    div(style = "position: absolute; top: 53px; right: -100px; z-index: 1000;",
-        materialSwitch(inputId = "toggleControls2", "Controls",
-                       status = "success", value = TRUE))
+  div(style = "position: absolute; top: 60px; right: -270px; z-index: 1000;",
+     prettyToggle(inputId = "toggleControls2",
+                  value = TRUE,
+                  label_on = NULL,
+                  icon_on = icon("xmark"),
+                  status_on = "primary",
+                  label_off = NULL,
+                  shape = "curve",
+                  outline = TRUE))
   ), # End Map page
-  
-  # About Page ----
+
+  # # About Page ----
   tabPanel(title = "About",
            # intro text fluidRow ----
            fluidRow(
@@ -65,5 +67,5 @@ ui <- navbarPage(
              column(1),
              column(10, includeMarkdown("text/about.md")),
              column(1)) # END intro text fluidRow
-  ), # END About tabPanel 
+  ) # END About tabPanel
 ) # End Navbar 
