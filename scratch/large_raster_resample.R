@@ -1,7 +1,7 @@
-raster_files2 <- list.files("myapp/data/ca_trees", pattern = "\\.tif$", full.names = TRUE)
+raster_files <- list.files("myapp/data/ca_trees", pattern = "\\.tif$", full.names = TRUE)
 
 # Get file information
-file_info <- file.info(raster_files2)
+file_info <- file.info(raster_files)
 
 # Filter files that are larger than 4 MB (4 MB = 4 * 1024 * 1024 bytes)
 large_rasters <- raster_files[file_info$size > (6.3 * 1024 * 1024)]

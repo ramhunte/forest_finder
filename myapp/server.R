@@ -132,21 +132,34 @@ server <- function(input, output, session) {
       #                             ordered = TRUE)
         
       proxy <- proxy %>%
-        addRasterImage(cnty_rast(), opacity = 1, project = FALSE, group = "Raster Layer") |> 
+        addRasterImage(cnty_rast(), opacity = 1, project = FALSE, 
+                       group = "Raster Layer")  
+        
+        if(input$toggleLegend) {
+          proxy <- proxy %>% 
+          addLegend(
+            pal = factorPalRev(),
+            values = factor(cnty_legend()$label,
+                            levels = cnty_legend()$label),
+            opacity = 1,
+            group = "Trees",
+            position = "bottomleft"
+          )
+        }
         # addRasterLegend(
         #   cnty_rast(),
         #   opacity = 1,
         #   group = "Trees",
         #   position = "bottomleft"
         # ) 
-      addLegend(
-        pal = factorPalRev(), 
-        values = factor(cnty_legend()$label, 
-                        levels = cnty_legend()$label),
-        opacity = 1,
-        group = "Trees",
-        position = "bottomleft"
-      ) 
+      # addLegend(
+      #   pal = factorPalRev(), 
+      #   values = factor(cnty_legend()$label, 
+      #                   levels = cnty_legend()$label),
+      #   opacity = 1,
+      #   group = "Trees",
+      #   position = "bottomleft"
+      # ) 
     }
     
     shinyjs::hideElement(id = 'loading') # Hide the spinner
@@ -170,8 +183,8 @@ server <- function(input, output, session) {
   # Observe legend toggle ----
   observeEvent(input$toggleLegend, {
     
-    if (!is.null(cnty_rast())) {
-      
+    # if (!is.null(cnty_rast())) {
+    req(cnty_rast(), cnty_legend())  # Ensure the reactive values are available
       
       # cnty_legend <- legend |>
       #   filter(value %in% unique(values(cnty_rast()))) |> 
@@ -184,8 +197,10 @@ server <- function(input, output, session) {
     proxy <- leafletProxy("mapOutput")
     
     if (input$toggleLegend) {
+      
+      
       # Add the legend if it is toggled on
-      if (!is.null(cnty_rast())) {
+      # if (!is.null(cnty_rast())) {
         proxy <- proxy %>%
           addLegend(
             pal = factorPalRev(), 
@@ -195,13 +210,13 @@ server <- function(input, output, session) {
             group = "Trees",
             position = "bottomleft"
           ) 
-      }
+      # }
     } else {
       # Remove the legend if it is toggled off
       proxy <- proxy %>%
         clearControls() 
       }
-    }
+    # }
   })
   
   # toggle control ----
