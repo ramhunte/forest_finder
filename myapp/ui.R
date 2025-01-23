@@ -35,7 +35,7 @@ ui <- navbarPage(
       pickerInput(
         inputId = "selectSpecies",
         label = "Species:",
-        choices = tree_levs$Label,
+        choices = sort(legend$label),
         multiple = TRUE,
         options = list(`actions-box` = TRUE)
       ),

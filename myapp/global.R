@@ -8,6 +8,7 @@ library(sf)
 library(leaflet)
 library(leaflet.extras)
 library(leafem)
+library(leaflegend)
 library(htmltools)
 library(tigris)
 
@@ -38,10 +39,8 @@ counties_ca <- counties(state = "California") |>
 # california public land ----
 # ca_land <- read_sf("data/California_Land_Ownership/California_Land_Ownership.shp")
 
-# levels and colors ----
-tree_levs <- read_rds("data/tree_levels.RDS")
-tree_coltab <- read_rds("data/tree_colors_tab.RDS")
-
+# raster legend ----
+legend <- read_rds("data/legend.RDS")
 
 
 

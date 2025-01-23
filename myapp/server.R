@@ -4,30 +4,46 @@
 
 server <- function(input, output, session) {
   
-  # Reactive: Filter counties and transform
+  # Reactive: Filter counties and transform ----
   cnty <- reactive({
     filter(counties_ca, NAME %in% input$selectCounty) |> 
       st_transform(4326)
   })
   
-  # Reactive: County-specific bounding box
+  # Reactive: County-specific bounding box ----
   bbox <- reactive({
     st_bbox(cnty()) |> as.data.frame()
   })
   
-  # Reactive: County-specific raster
+  
+  # Reactive: County-specific raster ----
   cnty_rast <- reactive({
     if (is.null(input$selectSpecies) || length(input$selectSpecies) == 0) {
       return(NULL)
     }
+    
     crop_rast <- county_rasters[[input$selectCounty]]
     rc_rast <- ifel(!is.null(crop_rast) & (crop_rast %in% input$selectSpecies), crop_rast, NA)
-    levels(rc_rast) <- tree_levs |> filter(Value %in% unique(values(crop_rast)))
-    coltab(rc_rast) <- tree_coltab
+    coltab(rc_rast) <- legend[,1:5]
     return(rc_rast)
   })
   
-  # Initial Map Render
+  # Reacive: Legend and colors ----
+  cnty_legend <- reactive ({ 
+    legend |>
+    filter(value %in% unique(values(cnty_rast()))) |> 
+    arrange(label)
+  })
+  
+  factorPalRev <- reactive ({ 
+    
+    colorFactor(cnty_legend()$hex,
+                              domain = cnty_legend()$label,
+                              ordered = TRUE)
+  })
+  
+  
+  # Map Render ----
   output$mapOutput <- renderLeaflet({
     leaflet() |> 
       addProviderTiles(providers$CartoDB.Positron) |> 
@@ -50,11 +66,13 @@ server <- function(input, output, session) {
       ")
   })
   
-  # Update Species Picker When County Changes
+  # Update Species Picker ----
   observeEvent(input$selectCounty, {
-    new_choices <- tree_levs |>
-      filter(Value %in% unique(values(county_rasters[[input$selectCounty]]))) |>
-      pull(Label)
+    new_choices <- legend |>
+      filter(value %in% unique(values(county_rasters[[input$selectCounty]]))) |>
+      arrange(label) |> 
+      pull(label)
+      
     
     # Retain previously selected species that are still valid
     valid_species <- input$selectSpecies[input$selectSpecies %in% new_choices]
@@ -103,15 +121,32 @@ server <- function(input, output, session) {
     
     # Add tree raster if available
     if (!is.null(cnty_rast())) {
+      
 
+      # cnty_legend <- legend |>
+      #   filter(value %in% unique(values(cnty_rast()))) |> 
+      #   arrange(label)
+      # 
+      # factorPalRev <- colorFactor(cnty_legend$hex,
+      #                             domain = cnty_legend$label,
+      #                             ordered = TRUE)
+        
       proxy <- proxy %>%
         addRasterImage(cnty_rast(), opacity = 1, project = FALSE, group = "Raster Layer") |> 
-        addRasterLegend(
-          cnty_rast(),
-          opacity = 1,
-          group = "Trees",
-          position = "bottomleft"
-        ) 
+        # addRasterLegend(
+        #   cnty_rast(),
+        #   opacity = 1,
+        #   group = "Trees",
+        #   position = "bottomleft"
+        # ) 
+      addLegend(
+        pal = factorPalRev(), 
+        values = factor(cnty_legend()$label, 
+                        levels = cnty_legend()$label),
+        opacity = 1,
+        group = "Trees",
+        position = "bottomleft"
+      ) 
     }
     
     shinyjs::hideElement(id = 'loading') # Hide the spinner
@@ -119,7 +154,7 @@ server <- function(input, output, session) {
   })
   
   # Observe raster toggle ----
-  # Observe the toggle button for raster visibility
+  # Observe the toggle button for raster visibility 
   observeEvent(input$toggleRaster, {
     proxy <- leafletProxy("mapOutput")
     
@@ -134,23 +169,38 @@ server <- function(input, output, session) {
   
   # Observe legend toggle ----
   observeEvent(input$toggleLegend, {
+    
+    if (!is.null(cnty_rast())) {
+      
+      
+      # cnty_legend <- legend |>
+      #   filter(value %in% unique(values(cnty_rast()))) |> 
+      #   arrange(label)
+      # 
+      # factorPalRev <- colorFactor(cnty_legend$hex,
+      #                             domain = cnty_legend$label,
+      #                             ordered = TRUE)
+      
     proxy <- leafletProxy("mapOutput")
     
     if (input$toggleLegend) {
       # Add the legend if it is toggled on
       if (!is.null(cnty_rast())) {
         proxy <- proxy %>%
-          addRasterLegend(
-            cnty_rast(),
+          addLegend(
+            pal = factorPalRev(), 
+            values = factor(cnty_legend()$label, 
+                            levels = cnty_legend()$label),
             opacity = 1,
             group = "Trees",
             position = "bottomleft"
-          )
+          ) 
       }
     } else {
       # Remove the legend if it is toggled off
       proxy <- proxy %>%
-        clearControls()
+        clearControls() 
+      }
     }
   })
   
