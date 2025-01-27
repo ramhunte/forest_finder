@@ -23,8 +23,16 @@ server <- function(input, output, session) {
     }
     
     crop_rast <- county_rasters[[input$selectCounty]]
+    
+    # specs <- filter(legend, label %in% input$selectSpecies) |> 
+    # pull(value)
+      
+    # rc_rast <- mask(crop_rast, crop_rast, specs, inverse = TRUE)
+    
     rc_rast <- ifel(!is.null(crop_rast) & (crop_rast %in% input$selectSpecies), crop_rast, NA)
+   
     coltab(rc_rast) <- legend[,1:5]
+    
     return(rc_rast)
   })
   
@@ -46,10 +54,11 @@ server <- function(input, output, session) {
   # Map Render ----
   output$mapOutput <- renderLeaflet({
     leaflet() |> 
-      addProviderTiles(providers$CartoDB.Positron) |> 
+      addTiles() |> 
       setView(lng = -119.4179, lat = 36.7783, zoom = 6) |> 
       addMouseCoordinates() |>  
-      addScaleBar(position = "bottomleft", options = scaleBarOptions(imperial = FALSE)) %>% 
+      addScaleBar(position = "bottomleft", 
+                  options = scaleBarOptions(imperial = FALSE)) |> 
       htmlwidgets::onRender("
         function(el, x) {
           var style = document.createElement('style');
@@ -100,6 +109,7 @@ server <- function(input, output, session) {
     
     # Add county polygon
     proxy <- proxy %>%
+      addProviderTiles(input$selectBasemap) |> 
       addPolygons(
         data = cnty(),
         color = "darkgreen",
@@ -121,15 +131,6 @@ server <- function(input, output, session) {
     
     # Add tree raster if available
     if (!is.null(cnty_rast())) {
-      
-
-      # cnty_legend <- legend |>
-      #   filter(value %in% unique(values(cnty_rast()))) |> 
-      #   arrange(label)
-      # 
-      # factorPalRev <- colorFactor(cnty_legend$hex,
-      #                             domain = cnty_legend$label,
-      #                             ordered = TRUE)
         
       proxy <- proxy %>%
         addRasterImage(cnty_rast(), opacity = 1, project = FALSE, 
@@ -146,20 +147,6 @@ server <- function(input, output, session) {
             position = "bottomleft"
           )
         }
-        # addRasterLegend(
-        #   cnty_rast(),
-        #   opacity = 1,
-        #   group = "Trees",
-        #   position = "bottomleft"
-        # ) 
-      # addLegend(
-      #   pal = factorPalRev(), 
-      #   values = factor(cnty_legend()$label, 
-      #                   levels = cnty_legend()$label),
-      #   opacity = 1,
-      #   group = "Trees",
-      #   position = "bottomleft"
-      # ) 
     }
     
     shinyjs::hideElement(id = 'loading') # Hide the spinner
@@ -207,7 +194,6 @@ server <- function(input, output, session) {
             values = factor(cnty_legend()$label, 
                             levels = cnty_legend()$label),
             opacity = 1,
-            group = "Trees",
             position = "bottomleft"
           ) 
       # }

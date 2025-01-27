@@ -8,7 +8,14 @@
 
 
 /* general tags */
-p, h1, h2, h4, h5, h6 {
+p {
+  color: #4E2A1C; /* Dark brown color for headers */
+    font-family: 'Montserrat', sans-serif;
+    font-size: 18px;
+  
+}
+
+h1, h2, h4, h5{
     color: #4E2A1C; /* Dark brown color for headers */
     font-family: 'Montserrat', sans-serif;
 }
@@ -16,6 +23,13 @@ p, h1, h2, h4, h5, h6 {
 h3 {
   color: #355E3B; /* Dark brown color for headers */
   font-family: 'Montserrat', sans-serif;
+  letter-spacing: 6px; /* Adjust the value as needed */
+}
+
+h6 {
+  color: #355E3B; /* Dark brown color for headers */
+  font-family: 'Montserrat', sans-serif;
+  font-size: 42px;
   letter-spacing: 6px; /* Adjust the value as needed */
 }
 

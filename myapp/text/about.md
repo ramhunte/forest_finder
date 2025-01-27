@@ -1,6 +1,17 @@
 
+<br>
 
-### Welcome!
+<h6 style="text-align: center;">Welcome to Forest Finder</h6>
+
+<br>
+
+<div style="text-align:center"> 
+
+<img src="../images/3trees_pix.png" style = "width: 350px; margin-bottom: 40px;" />
+
+</div>
+                                                        
+### About
 
 Forest Finder is an app that allows individuals to dynamically explore forests 
 throughout California's 58 counties by tree species or groups. My original goal in making this 
@@ -16,6 +27,8 @@ experience, so feel free to contact me if you have questions or suggestions. I h
 
 <br>
 
+
+<br>
 
 ### How to use it
 

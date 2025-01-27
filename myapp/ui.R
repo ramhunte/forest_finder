@@ -4,6 +4,16 @@ ui <- navbarPage(
   id = "main_navbar",
   header = includeCSS('www/styles.css'),
   
+  # # About Page ----
+  tabPanel(title = "About",
+           # intro text fluidRow ----
+           fluidRow(
+             # use columns to create white space on sides
+             column(1),
+             column(10, includeMarkdown("text/about.md")),
+             column(1)) # END intro text fluidRow
+  ), # END About tabPanel
+  
 
   # Map Page ----
   tabPanel(
@@ -39,6 +49,16 @@ ui <- navbarPage(
         multiple = TRUE,
         options = list(`actions-box` = TRUE)
       ),
+      
+      pickerInput(
+        inputId = "selectBasemap",
+        label = "Basemap:",
+        choices = c("Open Street Map (OSM)" = providers$OpenStreetMap,
+                    "Satellite" = providers$Esri.WorldImagery,
+                    "Plain" = providers$CartoDB.Positron),
+        multiple = FALSE
+      ),
+      
       materialSwitch(inputId = "toggleLegend", "Legend",
                      status = "success", value = TRUE),
       div(style = "padding-right: 23px;",
@@ -57,15 +77,5 @@ ui <- navbarPage(
                   label_off = NULL,
                   shape = "curve",
                   outline = TRUE))
-  ), # End Map page
-
-  # # About Page ----
-  tabPanel(title = "About",
-           # intro text fluidRow ----
-           fluidRow(
-             # use columns to create white space on sides
-             column(1),
-             column(10, includeMarkdown("text/about.md")),
-             column(1)) # END intro text fluidRow
-  ) # END About tabPanel
+  ) # End Map page
 ) # End Navbar 
