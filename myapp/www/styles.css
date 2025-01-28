@@ -90,6 +90,7 @@ body {
 /* Pickers */  
 #selectSpecies-label,
 #selectCounty-label,
+#selectBasemap-label,
 #toggleLegend,
 #toggleRaster {
   color: #355E3B;

@@ -29,10 +29,10 @@ writeRaster(rep_crop_ca, "myapp/data/ca_trees/CA_TreeMap2016_FLDTYPCD.tif", over
 # Create a directory to save the output rasters
 output_dir <- "myapp/data/ca_trees"
 
-test <- rast("/Users/rayhunter/Documents/coding/forest_finder/myapp/data/TreeMap2016_FLDTYPCD/CA_TreeMap2016_FLDTYPCD.tif")
+test <- rast("/Users/rayhunter/Documents/coding/forest_finder/myapp/data/unused_data/TreeMap2016_FLDTYPCD/CA_TreeMap2016_FLDTYPCD.tif")
 
 counts <- counties_ca |> 
-  filter(NAME %in% c("Santa Cruz"))
+  filter(NAME %in% c("Siskiyou"))
 # filter(NAME %in% c("Sierra", "San Diego", "Napa", "Monterey", "Mono", "Merced", "Los Angeles", "Kings", "Kern", "Imperial", "Glenn", "Calaveras", "Riverside", "Tuolumne", "Tulare", "Fresno", "Humboldt", "Inyo", "Lassen", "Medocino", "Modoc", "Plumas", "San Bernardino", "Shasta", "Siskiyou", "Solano", "Trinity"))
 
 # Loop through each county and crop the raster
@@ -55,6 +55,7 @@ for (i in 1:nrow(counts)) {
   # Save the cropped raster as a .tif file
   writeRaster(cropped_raster, output_file, overwrite = TRUE)
 }
+
 
 
 
