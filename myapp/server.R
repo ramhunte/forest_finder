@@ -109,11 +109,12 @@ server <- function(input, output, session) {
     
     # Add county polygon
     proxy <- proxy %>%
+      clearTiles() |> 
       addProviderTiles(input$selectBasemap) |> 
       addPolygons(
         data = cnty(),
         color = "darkgreen",
-        weight = 1.5,
+        weight = 2,
         fillColor = "transparent"
       ) 
     
@@ -213,8 +214,6 @@ server <- function(input, output, session) {
       runjs("$('#controls').addClass('hidden');")  # Hide controls
     }
   })
-  
-  
 
 }
 

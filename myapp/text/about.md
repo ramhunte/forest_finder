@@ -62,7 +62,21 @@ versa. The data is robust enough to show broad patterns by county where you woul
 Furthermore, the app does not distinguish between private and public land. In many if not most cases, many of these forests
 will be on private land, so it is the users responsibility to land ownership prior to embarking on an adventure.
 
+<br> 
 
-Citation:
-Riley, Karin L.; Grenfell, Isaac C.; Finney, Mark A.; Shaw, John D. 2021. TreeMap 2016: A tree-level model of the forests of the conterminous United States circa 2016. Fort Collins, CO: Forest Service Research Data Archive. https://doi.org/10.2737/RDS-2021-0074
+
+### Citation
+
+<p style="font-size: 12px; margin: 0;">
+  <em>Riley, Karin L.; Grenfell, Isaac C.; Finney, Mark A.; Shaw, John D. 2021. TreeMap 2016: A tree-level model of the forests of the conterminous United States</em>
+  <span style="display: block; text-indent: 20px;">
+    <em>circa 2016. Fort Collins, CO: ForestService Research Data Archive.</em> 
+    <a href="https://doi.org/10.2737/RDS-2021-0074">https://doi.org/10.2737/RDS-2021-0074</a>
+  </span>
+</p>
+
+
+<br> 
+
+
 

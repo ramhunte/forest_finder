@@ -37,6 +37,12 @@ body {
       background-color: #E9E8D8; /* Light beige color */
 }
 
+/* highlighted text */
+a {
+    color: #01796F;
+    text-decoration: none;
+}
+
 /* Navbar */
 .navbar {
     background-color: #355E3B !important; /* Dark Green */
