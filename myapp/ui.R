@@ -104,6 +104,7 @@ ui <- navbarPage(
     useShinyjs(),
     title = "Interactive Map",
     div(
+      # style = "position: relative; width: 100%; height: 100vh;",
       style = "position: absolute; top: 0; bottom: 0; left: 0; right: 0; ", # Full viewport height and width
       leafletOutput(outputId = "mapOutput", width = "100%", height = "100%"),
 
@@ -133,7 +134,7 @@ ui <- navbarPage(
         multiple = TRUE,
         options = list(`actions-box` = TRUE)
       ),
-      
+
       pickerInput(
         inputId = "selectBasemap",
         label = "Basemap:",
@@ -142,7 +143,7 @@ ui <- navbarPage(
                     "Plain" = providers$CartoDB.Positron),
         multiple = FALSE
       ),
-      
+
       materialSwitch(inputId = "toggleLegend", "Legend",
                      status = "success", value = TRUE),
       div(style = "padding-right: 23px;",
@@ -151,16 +152,19 @@ ui <- navbarPage(
       actionButton(inputId = "applyFilters", label = "Apply")
 
     )
-    ),
-  div(style = "position: absolute; top: 60px; right: -270px; z-index: 1000;",
-     prettyToggle(inputId = "toggleControls2",
-                  value = TRUE,
-                  label_on = NULL,
-                  icon_on = icon("xmark"),
-                  status_on = "primary",
-                  label_off = NULL,
-                  shape = "curve",
-                  outline = TRUE))
+    ), # END absolute Panel
+  
+  # control toggle
+  div(style = "position: fixed; top: 60px; right: -270px; z-index: 1000;",
+   prettyToggle(inputId = "toggleControls2",
+                value = TRUE,
+                label_on = NULL,
+                icon_on = icon("xmark"),
+                status_on = "primary",
+                label_off = NULL,
+                shape = "curve",
+                outline = TRUE)
+     ) # End DIV
   ) # End Map page
 
 ) # End Navbar 
