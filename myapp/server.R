@@ -1,50 +1,49 @@
-
-# New UI that woprks better :) ----
-
-
 server <- function(input, output, session) {
   
   # Reactive: Filter counties and transform ----
   cnty <- reactive({
-    filter(counties_ca, NAME %in% input$selectCounty) |> 
-      st_transform(4326)
+    filter(counties_ca, NAME %in% input$selectCounty) |> # filter to selected counties
+      st_transform(4326) # changing crs for cropping
   })
   
   # Reactive: County-specific bounding box ----
   bbox <- reactive({
-    st_bbox(cnty()) |> as.data.frame()
+    st_bbox(cnty()) |> # creating a new bounding box from county 
+      as.data.frame()
   })
   
   
   # Reactive: County-specific raster ----
   cnty_rast <- reactive({
+    
+    # makign sure the raster has values, NULL if not
     if (is.null(input$selectSpecies) || length(input$selectSpecies) == 0) {
       return(NULL)
     }
     
+    # selecting county raster
     crop_rast <- county_rasters[[input$selectCounty]]
     
-    # specs <- filter(legend, label %in% input$selectSpecies) |> 
-    # pull(value)
-      
-    # rc_rast <- mask(crop_rast, crop_rast, specs, inverse = TRUE)
-    
+    # reclassifying it to include just the species of interest
     rc_rast <- ifel(!is.null(crop_rast) & (crop_rast %in% input$selectSpecies), crop_rast, NA)
    
+    # reassigning color tab (it gets lost when reclassifying)
     coltab(rc_rast) <- legend[,1:5]
     
     return(rc_rast)
   })
   
-  # Reacive: Legend and colors ----
+  # Reactive: Legend and colors ----
+  # creating a legend from the raster values
   cnty_legend <- reactive ({ 
     legend |>
-    filter(value %in% unique(values(cnty_rast()))) |> 
-    arrange(label)
+    filter(value %in% unique(values(cnty_rast()))) |> # filter to only uniques tree values
+    arrange(label) 
   })
   
+  # 
   factorPalRev <- reactive ({ 
-    
+    # creating an ordered factor color pallet from the legend
     colorFactor(cnty_legend()$hex,
                               domain = cnty_legend()$label,
                               ordered = TRUE)
@@ -53,13 +52,14 @@ server <- function(input, output, session) {
   
   # Map Render ----
   output$mapOutput <- renderLeaflet({
-    leaflet() |> 
-      addTiles() |> 
-      setView(lng = -119.4179, lat = 36.7783, zoom = 6) |> 
+    leaflet() |> # creating a basemap 
+      addTiles() |> # base map is OSM
+      setView(lng = -119.4179, lat = 36.7783, zoom = 6) |> # set original view on CA
       addMouseCoordinates() |>  
       addScaleBar(position = "bottomleft", 
                   options = scaleBarOptions(imperial = FALSE)) |> 
-      htmlwidgets::onRender("
+      # setting the size dimensions of the legend
+      htmlwidgets::onRender(" 
         function(el, x) {
           var style = document.createElement('style');
           style.innerHTML = `
@@ -77,56 +77,61 @@ server <- function(input, output, session) {
   
   # Update Species Picker ----
   observeEvent(input$selectCounty, {
+    
     new_choices <- legend |>
-      filter(value %in% unique(values(county_rasters[[input$selectCounty]]))) |>
-      arrange(label) |> 
+      filter(value %in% unique(values(county_rasters[[input$selectCounty]]))) |> # filter to just trees available in the chosen raster
+      arrange(label) |> # sorting and oulling the species name from the raster
       pull(label)
       
-    
-    # Retain previously selected species that are still valid
+    # keep previously selected tree species selected in new county raster
     valid_species <- input$selectSpecies[input$selectSpecies %in% new_choices]
     
+    # updating species picker with new choices and new values 
     updatePickerInput(session, 
                       inputId = "selectSpecies", 
                       choices = new_choices, 
                       selected = valid_species)
   })
   
-  # Apply Filters and Update Map
+  # Apply Filters/Update Map ----
   
-  # Reactive value to store the previous bounding box
+  # make original bbox NULL when rendering map at first
   previous_bbox <- reactiveVal(NULL)
   
   observeEvent(input$applyFilters, {
     
-    shinyjs::showElement(id = 'loading') # Show the spinner
+    shinyjs::showElement(id = 'loading') # Show a loading spinner when rendering
     
     proxy <- leafletProxy("mapOutput")
-    proxy <- proxy %>%
+    
+    # clear all polygons, rasters, and legends when re-rendered 
+    proxy <- proxy %>% # 
       clearShapes() %>%
       clearImages() %>%
       clearControls()
     
     # Add county polygon
     proxy <- proxy %>%
-      clearTiles() |> 
-      addProviderTiles(input$selectBasemap) |> 
-      addPolygons(
+      clearTiles() |> # remove basemap
+      addProviderTiles(input$selectBasemap) |> # add new basemap from selected picker 
+      addPolygons( # add new county lines
         data = cnty(),
-        color = "darkgreen",
+        color = "red",
         weight = 2,
         fillColor = "transparent"
       ) 
     
-    # Check if bbox has changed
-    current_bbox <- bbox()
-    if (!identical(previous_bbox(), current_bbox)) {
-      proxy <- proxy %>%
+    current_bbox <- bbox() # set new boundaries to current bbox
+    
+    if (!identical(previous_bbox(), current_bbox)) { # Check if bbox has changed
+      
+      proxy <- proxy %>% # make new boundaries if bounding box has updated
         fitBounds(
           lng1 = current_bbox[1, ], lat1 = current_bbox[2, ],
           lng2 = current_bbox[3, ], lat2 = current_bbox[4, ]
         )
-      # Update the previous bbox
+      
+      # Update the previous bbox with new boundaries
       previous_bbox(current_bbox)
     }
     
@@ -137,7 +142,9 @@ server <- function(input, output, session) {
         addRasterImage(cnty_rast(), opacity = 1, project = FALSE, 
                        group = "Raster Layer")  
         
+      # add legend of new raster image if toggled on 
         if(input$toggleLegend) {
+          
           proxy <- proxy %>% 
           addLegend(
             pal = factorPalRev(),
@@ -160,27 +167,16 @@ server <- function(input, output, session) {
     proxy <- leafletProxy("mapOutput")
     
     if (input$toggleRaster) {
-      # Show the raster layer by adding it to the map
-      proxy %>% showGroup("Raster Layer")
+      proxy %>% showGroup("Raster Layer") # Show the raster layer by adding it to the map
     } else {
-      # Hide the raster layer by removing it from the map
-      proxy %>% hideGroup("Raster Layer")
+      proxy %>% hideGroup("Raster Layer") # Hide the raster layer by removing it from the map
     }
   })
   
-  # Observe legend toggle ----
+  # toggle legend  ----
   observeEvent(input$toggleLegend, {
     
-    # if (!is.null(cnty_rast())) {
-    req(cnty_rast(), cnty_legend())  # Ensure the reactive values are available
-      
-      # cnty_legend <- legend |>
-      #   filter(value %in% unique(values(cnty_rast()))) |> 
-      #   arrange(label)
-      # 
-      # factorPalRev <- colorFactor(cnty_legend$hex,
-      #                             domain = cnty_legend$label,
-      #                             ordered = TRUE)
+    req(cnty_rast(), cnty_legend())  # Ensure the reactive values and legend are available
       
     proxy <- leafletProxy("mapOutput")
     
@@ -188,7 +184,6 @@ server <- function(input, output, session) {
       
       
       # Add the legend if it is toggled on
-      # if (!is.null(cnty_rast())) {
         proxy <- proxy %>%
           addLegend(
             pal = factorPalRev(), 
@@ -197,21 +192,19 @@ server <- function(input, output, session) {
             opacity = 1,
             position = "bottomleft"
           ) 
-      # }
     } else {
       # Remove the legend if it is toggled off
       proxy <- proxy %>%
         clearControls() 
       }
-    # }
   })
   
   # toggle control ----
   observeEvent(input$toggleControls2, {
     if (input$toggleControls2) {
-      runjs("$('#controls').removeClass('hidden');")  # Show controls
+      runjs("$('#controls').removeClass('hidden');")  # Show controls absolute panel
     } else {
-      runjs("$('#controls').addClass('hidden');")  # Hide controls
+      runjs("$('#controls').addClass('hidden');")  # Hide controls asolute panel
     }
   })
 

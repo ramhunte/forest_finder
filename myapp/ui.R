@@ -16,7 +16,7 @@ ui <- navbarPage(
                top: 10px;
              right: 10px;")  # Font Awesome mail icon
     )
-  ), # end mail Icon 
+  ), # END mail Icon 
   
   # github icon 
   tags$ul(
@@ -30,7 +30,7 @@ ui <- navbarPage(
                top: 10px;
              right: 50px;")  # Font Awesome mail icon
     )
-  ), # end Github Icon 
+  ), # END Github Icon 
   
   # linkedin icon
   tags$ul(
@@ -44,7 +44,7 @@ ui <- navbarPage(
                top: 10px;
              right: 90px;")  # Font Awesome mail icon
     )
-  ), # end linkedin Icon 
+  ), # END linkedin Icon 
   
   # website icon 
   tags$ul(
@@ -58,8 +58,8 @@ ui <- navbarPage(
                top: 12px;
              right: 130px;")  # Font Awesome mail icon
     )
-  ) # end website Icon 
-  ), # End titile div()
+  ) # END website Icon 
+  ), # END titile div()
   
   # linking CSS
   header = includeCSS('www/styles.css'),
@@ -149,7 +149,7 @@ ui <- navbarPage(
       div(style = "padding-right: 23px;",
         materialSwitch(inputId = "toggleRaster", "Trees  ",
                      status = "success", value = TRUE)),
-      actionButton(inputId = "applyFilters", label = "Apply")
+      actionButton(inputId = "applyFilters", label = "Find")
 
     )
     ), # END absolute Panel
@@ -164,7 +164,6 @@ ui <- navbarPage(
                 label_off = NULL,
                 shape = "curve",
                 outline = TRUE)
-     ) # End DIV
-  ) # End Map page
-
-) # End Navbar 
+     ) # END DIV
+  ) # END Map page
+) # END Navbar 
