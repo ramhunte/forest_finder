@@ -10,6 +10,12 @@ myapp/data/
 # .DS store
 .DS_Store
 
+# original tree image 
+myapp/images/3trees.png
+
+# image processing
+cleaning/image_processing.R
+
 # User-specific files
 .Ruserdata
 
