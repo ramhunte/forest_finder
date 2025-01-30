@@ -31,7 +31,7 @@ counties_ca <- counties(state = "California") |>
   st_transform(crs = 3857)
 
 # # california public land ----
-# ca_land <- read_sf("myapp/data/unused_data/California_Land_Ownership/California_Land_Ownership.shp")
+# ca_land <- read_sf("data/unused_data/California_Land_Ownership/California_Land_Ownership.shp")
 
 # raster legend ----
 legend <- read_rds("data/legend.RDS")

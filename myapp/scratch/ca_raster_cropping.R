@@ -1,5 +1,5 @@
 ###################### making a CA raster from OG data ######################
-og_rast <-  rast("/Users/rayhunter/Documents/coding/forest_finder/myapp/data/TreeMap2016_FLDTYPCD/TreeMap2016_FLDTYPCD.tif")
+og_rast <-  rast("/myapp/data/TreeMap2016_FLDTYPCD/TreeMap2016_FLDTYPCD.tif")
 
 # get california polygon
 california <- states() |> 
@@ -28,7 +28,7 @@ writeRaster(rep_crop_ca, paste0(output_dir, "/CA_TreeMap2016_FLDTYPCD.tif"), ove
 
 ###################### making a county rasters from CA raster ######################
 
-ca_rast <- rast("/Users/rayhunter/Documents/coding/forest_finder/myapp/data/unused_data/TreeMap2016_FLDTYPCD/CA_TreeMap2016_FLDTYPCD.tif")
+ca_rast <- rast("myapp/data/unused_data/TreeMap2016_FLDTYPCD/CA_TreeMap2016_FLDTYPCD.tif")
 
 counts <- counties_ca |> 
   filter(NAME %in% c("Siskiyou")) # select county to resample

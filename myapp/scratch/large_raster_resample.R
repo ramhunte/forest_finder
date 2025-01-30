@@ -42,7 +42,7 @@ for (i in seq_along(rasters30)) {
 
 ########### resampling Siskiyou to 80mx80m  resolution (cant use aggregate for 80x80, all others are 60)
 
-rast_sisk <- rast("/Users/rayhunter/Documents/coding/forest_finder/myapp/data/ca_trees/Siskiyou.tif")
+rast_sisk <- rast("data/ca_trees/Siskiyou.tif")
 
 resampled_raster_temp <- rast(
   extent = ext(rast_sisk),   # Same spatial extent
@@ -58,5 +58,5 @@ resampled_raster <- resample(rast_sisk, resampled_raster_temp, method = "near")
 resampled_raster_trim <- trim(resampled_raster)
 
 # writing raster to data
-writeRaster(resampled_raster_trim, filename = "/Users/rayhunter/Documents/coding/forest_finder/myapp/data/ca_trees/Siskiyou.tif", overwrite = TRUE)
+writeRaster(resampled_raster_trim, filename = "myapp/data/ca_trees/Siskiyou.tif", overwrite = TRUE)
 
