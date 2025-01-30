@@ -52,7 +52,7 @@ it has for me.
    ├─ server.R                     # server
    ├─ ui.R                         # user interface
    ├─ text                         # contains text files 
-      └─ about.md                     # about page text
+   |  └─ about.md                     # about page text
    └─ www                          # stores styles for app
       └─ styles.css
 ```
