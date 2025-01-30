@@ -42,11 +42,9 @@ it has for me.
 ├─ gitignore
 ├─ README.md
 └─ cleaning                     # conatains data cleaning processes
-│  ├─ ca_raster_cropping.R         # extracting california subrastres from master data
-│  ├─ large_raster_resample.R      # resampling rasters from 30x30 
-│  └─ image_processing.R           # creating image for about page
+│  └─ raster_processing.R           # cropping, masking, and resampling raster data
 └─ myapp                        # folder containing all the app scripts
-   ├─ data                         # data folder (not included in folder)
+   ├─ data                         # see `cleaning/raster_processing.R` script to get data
    ├─ global.R                     # global functions for all of app
    ├─ images                       # conatins used images
    ├─ server.R                     # server
