@@ -5,7 +5,9 @@
 # Session Data files
 .RData
 .RDataTmp
-myapp/data/*
+myapp/data/unused_data
+myapp/data/ca_trees/*
+
 
 # .DS store
 .DS_Store
