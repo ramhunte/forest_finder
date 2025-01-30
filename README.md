@@ -54,9 +54,7 @@ All forested area raster pixels are shown at a 60mx60m resolution in EPSG 3857 w
 county which is 80mx80m resolution. To read more about the original data set and related research, please see 
 attached publication details on the United States Department of Agriculture website [HERE](https://data.fs.usda.gov/geodata/rastergateway/treemap/index.php).
 
-<em>Riley, Karin L.; Grenfell, Isaac C.; Finney, Mark A.; Shaw, John D.
-2021. TreeMap 2016: A tree-level model of the forests of the
-conterminous United States</em> [ <em>circa 2016. Fort Collins, CO:
-ForestService Research Data Archive.</em>
-<a href="https://doi.org/10.2737/RDS-2021-0074">https://doi.org/10.2737/RDS-2021-0074</a>
-]
+
+*Riley, Karin L.; Grenfell, Isaac C.; Finney, Mark A.; Shaw, John D.* (2021). TreeMap 2016: A 
+tree-level model of the forests of the conterminous United States [circa 2016]. Fort Collins, CO: Forest Service Research Data Archive.  [https://doi.org/10.2737/RDS-2021-0074](https://doi.org/10.2737/RDS-2021-0074)
+
