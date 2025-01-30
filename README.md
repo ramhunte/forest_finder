@@ -1,8 +1,3 @@
----
-editor_options: 
-  markdown: 
-    wrap: 72
----
 
 <h1 align="center">
 
@@ -38,25 +33,22 @@ corner). Forest Finder may grow, it may die, it may slowly evolve into
 something that it wasn’t yesterday. I hope that it can serve you well as
 it has for me.
 
-<h3 align="center">
 
-Repository Structure
+### Repository Structure
 
-</h3>
 
-<h3 align="center">
 
-Developer
 
-</h3>
+
+### Developer
+
 
 [Ray Hunter](https://ramhunte.github.io/)
 
-<h3 align="center">
 
 Acknowledgements
 
-</h3>
+
 
 <p style="font-size: 12px; margin: 0;">
 
