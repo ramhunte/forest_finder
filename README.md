@@ -41,10 +41,11 @@ it has for me.
 ├─ forest_finder.Rproj
 ├─ gitignore
 ├─ README.md
-└─ cleaning                     # conatains data cleaning processes
+├─ cleaning                     # conatains data cleaning processes
 │  └─ raster_processing.R           # cropping, masking, and resampling raster data
 └─ myapp                        # folder containing all the app scripts
    ├─ data                         # see `cleaning/raster_processing.R` script to get data
+   │  └─ www                          # stores styles for app
    ├─ global.R                     # global functions for all of app
    ├─ images                       # conatins used images
    ├─ server.R                     # server
