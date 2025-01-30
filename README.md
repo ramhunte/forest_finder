@@ -36,7 +36,26 @@ it has for me.
 
 ### Repository Structure
 
-
+```
+.
+├─ forest_finder.Rproj
+├─ gitignore
+├─ README.md
+└─ cleaning                     # conatains data cleaning processes
+│  ├─ ca_raster_cropping.R         # extracting california subrastres from master data
+│  ├─ large_raster_resample.R      # resampling rasters from 30x30 
+│  └─ image_processing.R           # creating image for about page
+└─ myapp                        # folder containing all the app scripts
+   ├─ data                         # data folder (not included in folder)
+   ├─ global.R                     # global functions for all of app
+   ├─ images                       # conatins used images
+   ├─ server.R                     # server
+   ├─ ui.R                         # user interface
+   ├─ text                         # contains text files 
+      └─ about.md                     # about page text
+   └─ www                          # stores styles for app
+      └─ styles.css
+```
 
 
 
