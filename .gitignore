@@ -5,15 +5,15 @@
 # Session Data files
 .RData
 .RDataTmp
-ff_app/data/unused_data
-ff_app/data/ca_trees/*
+forest_finder/data/unused_data
+forest_finder/data/ca_trees/*
 
 
 # .DS store
 .DS_Store
 
 # original tree image 
-ff_app/images/3trees.png
+forest_finder/images/3trees.png
 
 # image processing
 cleaning/image_processing.R
