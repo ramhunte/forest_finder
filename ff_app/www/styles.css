@@ -1,0 +1,190 @@
+
+/* styles.css */
+
+/* Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Englebert&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Englebert&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+
+/* general tags */
+p {
+  color: #4E2A1C; /* Dark brown color for headers */
+    font-family: 'Montserrat', sans-serif;
+    font-size: 18px;
+  
+}
+
+h1, h2, h4, h5{
+    color: #4E2A1C; /* Dark brown color for headers */
+    font-family: 'Montserrat', sans-serif;
+}
+
+h3 {
+  color: #355E3B; /* Dark brown color for headers */
+  font-family: 'Montserrat', sans-serif;
+  letter-spacing: 6px; /* Adjust the value as needed */
+}
+
+h6 {
+  color: #355E3B; /* Dark brown color for headers */
+  font-family: 'Montserrat', sans-serif;
+  font-size: 42px;
+  letter-spacing: 6px; /* Adjust the value as needed */
+}
+
+body {
+      background-color: #E9E8D8; /* Light beige color */
+      color: #355E3B;
+}
+
+/* highlighted text */
+a {
+    color: #01796F;
+    text-decoration: none;
+}
+
+/* Navbar */
+.navbar {
+    background-color: #355E3B !important; /* Dark Green */
+    border-color: #004d00; /* Slightly darker shade for the border */
+    font-family: 'Montserrat', sans-serif; /* Apply Kranky font to the navbar */
+} 
+
+/* Navbar title */
+.navbar .navbar-brand {
+  color: #ffffff !important; /* White text */
+  font-size: 28px; /* Larger font size for the brand/title */
+  font-family: 'Montserrat', sans-serif; /* Apply Kranky font to the navbar */
+
+}
+
+/* Navbar title container */
+.navbar>.container-fluid .navbar-brand {
+  margin-left: -20px;
+  margin-right: 0px;
+}
+
+/* Navbar text */
+.navbar .navbar-nav > li > a {
+  color: #ffffff !important; /* White text */
+  font-size: 18px; /* Set font size for navbar links */
+    }
+
+.navbar-nav li a:hover, 
+.navbar-nav > .active > a {
+ color: #ffffff !important;
+  background-color:#01796F !important;  
+  background-image: none !important;
+}
+
+/* Leaflet Button */
+.leaflet-control-zoom {
+  top: 60px !important; /* Move down 60px from the top (adjust as needed) */
+}
+
+/* Control Panel */
+#controls {
+  /* Appearance */
+  background-color: #E9E8D8;
+  border-color: #8A9A5B;
+  border-width: 3px;
+  padding: 10px 10px 10px 20px;
+  cursor: move;
+  zoom: 0.8;
+}
+
+/* Pickers */  
+#selectSpecies-label,
+#selectCounty-label,
+#selectBasemap-label,
+#toggleLegend,
+#toggleRaster {
+  color: #355E3B;
+  font-size: 24px;
+  font-weight: 600;
+  font-family: 'Montserrat', sans-serif;
+}
+
+/* dropdowns */
+.selectize-dropdown-content,
+.item,
+.filter-option-inner-inner,
+.dropdown-item {
+  color:#355E3B !important;
+  font-size: 18px;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.dropdown-menu {
+      max-width: 200px; /* Adjust this width */
+}
+
+.selected { 
+background-color:#01796F !important;
+color:#ffffff !important;
+  
+} 
+
+/* deselect/select all button */
+.btn-group-sm>.btn, .btn-sm {
+    padding: 7px 4px 6px 0px;
+    line-height: .5;
+}
+.bs-actionsbox .btn{
+    color: #355E3B;             /* Change text color if needed */
+    border-color: #355E3B;    /* Optional: Change border color */
+    background-color: #E9E8D8;
+    font-size: 18px;
+    font-family: 'Montserrat', sans-serif;
+}
+
+  /* Legend and Tree toggle label */  
+ .material-switch label {
+    cursor: pointer;
+    font-weight: 200;
+    color:#355E3B !important; 
+    font-size: 24px; 
+    font-family: 'Montserrat', sans-serif;
+}   
+
+/* Legend and Tree toggle switch color */
+.label-success {
+   background-color:#355E3B
+}
+
+/* Apply Button */
+#applyFilters {
+  background-color:#01796F !important;
+  font-size: 22px;    /* Reduce the font size */
+  font-family: 'Montserrat', sans-serif;
+  padding: 2px 4px;  /* Adjust padding (top-bottom, left-right) */
+  height: auto;       /* Let the height adjust to content */
+  width: auto;        /* Let the width adjust to content */
+  line-height: 1.2;   /* Adjust line height for better spacing */
+  border-radius: 7px; /* Optional: rounded corners */
+  color: #ffffff !important;  /* Set text color to white */
+  display: block; margin: 0 auto;
+}
+
+/* x mark in checkbox */
+.pretty input:checked~.state.p-primary-o .icon {
+  color: #355E3B!important;
+  stroke: #355E3B!important;
+  
+}
+
+/* checkbox */
+.pretty input:checked~.state.p-primary-o label:after,
+.pretty .state.p-danger-o label:after { 
+  border-color: #355E3B!important; 
+}
+
+/* in text code */
+
+code {
+  color: #01796F;
+  background-color: #ffffff;
+}
+    
+    
