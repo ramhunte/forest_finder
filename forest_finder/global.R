@@ -11,6 +11,7 @@ library(sf)
 library(tigris)
 library(leaflet)
 library(leaflet.extras)
+library(raster)
 library(leafem)
 
 ### READ IN DATA

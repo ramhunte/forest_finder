@@ -3,14 +3,14 @@
 
 ####################### HOW TO GET AND PROCESS DATA: MUST DO BEFORE RUNNING APP #####################
 
-# - create another file called 'ca_trees' under 'myapp/data'
+# - create another file called 'ca_trees' under 'forest_finder/data'
 # - download the FLDTYPCD: Field Forest Code data from https://data.fs.usda.gov/geodata/rastergateway/treemap/index.php
-# - move it in your 'myapp/data' folder and unzip the file
+# - move it in your 'forest_finder/data' folder and unzip the file
 
 
 ################ 1) making a CA raster from original data ###########################
 
-og_rast <-  rast("myapp/data/TreeMap2016_FLDTYPCD/TreeMap2016_FLDTYPCD.tif")
+og_rast <-  rast("forest_finder/data/TreeMap2016_FLDTYPCD/TreeMap2016_FLDTYPCD.tif")
 
 # get California polygon
 california <- tigiris::states() |> 
@@ -30,12 +30,12 @@ rep_crop_ca <- crop_ca2 |>
   project("EPSG:3857", res = 30)
 
 # write it to data
-writeRaster(rep_crop_ca, paste0(output_dir, "myapp/data/CA_TreeMap2016_FLDTYPCD.tif"), overwrite = TRUE)
+writeRaster(rep_crop_ca, paste0(output_dir, "forest_finder/data/CA_TreeMap2016_FLDTYPCD.tif"), overwrite = TRUE)
 
 
 ################ 2) making individual CA county rasters from CA raster #######################
 
-ca_rast <- rast("myapp/data/CA_TreeMap2016_FLDTYPCD.tif")
+ca_rast <- rast("forest_finder/data/CA_TreeMap2016_FLDTYPCD.tif")
 
 # get county polygons 
 counts <- counties(state = "California") |> 
@@ -59,7 +59,7 @@ for (i in 1:nrow(counts)) {
   
   
   # Create a directory to save the output rasters
-  output_dir <- "myapp/data/ca_trees"
+  output_dir <- "forest_finder/data/ca_trees"
   
   # Define the output file path with county name
   output_file <- file.path(output_dir, paste0(county_name, ".tif"))
@@ -71,7 +71,7 @@ for (i in 1:nrow(counts)) {
 ################### 3) reasampling resolution of rasters #######################################
 
 # List all .tif files in the folder
-raster_files <- list.files("myapp/data/ca_trees", pattern = "\\.tif$", full.names = TRUE)
+raster_files <- list.files("forest_finder/data/ca_trees", pattern = "\\.tif$", full.names = TRUE)
 
 # Create a named list of rasters
 county_rasters <- setNames(
@@ -115,7 +115,7 @@ resampled_raster <- resample(rast_sisk, resampled_raster_temp, method = "near")
 resampled_raster_trim <- trim(resampled_raster)
 
 # writing raster to data
-writeRaster(resampled_raster_trim, filename = "myapp/data/ca_trees/Siskiyou.tif", overwrite = TRUE)
+writeRaster(resampled_raster_trim, filename = "forest_finder/data/ca_trees/Siskiyou.tif", overwrite = TRUE)
 
 
 
