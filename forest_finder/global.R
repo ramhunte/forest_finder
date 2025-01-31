@@ -1,4 +1,6 @@
 library(tidyverse)
+library(markdown)
+library(rmarkdown)
 # Shiny tools 
 library(shiny)
 library(shinyWidgets)
@@ -11,8 +13,7 @@ library(sf)
 library(tigris)
 library(leaflet)
 library(leaflet.extras)
-library(raster)
-library(leafem)
+# library(leafem)
 
 ### READ IN DATA
 

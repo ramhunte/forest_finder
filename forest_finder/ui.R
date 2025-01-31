@@ -1,3 +1,5 @@
+library(markdown)
+library(rmarkdown)
 
 ui <- navbarPage(
   title = div("Forest Finder",
