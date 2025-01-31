@@ -1,9 +1,14 @@
 
-# download the FLDTYPCD: Field Forest Code data from https://data.fs.usda.gov/geodata/rastergateway/treemap/index.php
-# store this in your data folder and unzip the file
 
 
-# 1) making a CA raster from OG data ######################################
+####################### HOW TO GET AND PROCESS DATA: MUST DO BEFORE RUNNING APP #####################
+
+# - create another file called 'ca_trees' under 'myapp/data'
+# - download the FLDTYPCD: Field Forest Code data from https://data.fs.usda.gov/geodata/rastergateway/treemap/index.php
+# - move it in your 'myapp/data' folder and unzip the file
+
+
+################ 1) making a CA raster from original data ###########################
 
 og_rast <-  rast("myapp/data/TreeMap2016_FLDTYPCD/TreeMap2016_FLDTYPCD.tif")
 
@@ -28,7 +33,7 @@ rep_crop_ca <- crop_ca2 |>
 writeRaster(rep_crop_ca, paste0(output_dir, "myapp/data/CA_TreeMap2016_FLDTYPCD.tif"), overwrite = TRUE)
 
 
-# 2) making individual CA county rasters from CA raster ######################################
+################ 2) making individual CA county rasters from CA raster #######################
 
 ca_rast <- rast("myapp/data/CA_TreeMap2016_FLDTYPCD.tif")
 
@@ -52,8 +57,6 @@ for (i in 1:nrow(counts)) {
   # Get the county name from the 'NAME' column
   county_name <- county$NAME
   
-  # create mew folder
-  dir.create("myapp/data/ca_trees")
   
   # Create a directory to save the output rasters
   output_dir <- "myapp/data/ca_trees"
@@ -65,7 +68,7 @@ for (i in 1:nrow(counts)) {
   writeRaster(cropped_raster, output_file, overwrite = TRUE)
 }
 
-# 3) reasampling resolution of rasters #######################################
+################### 3) reasampling resolution of rasters #######################################
 
 # List all .tif files in the folder
 raster_files <- list.files("myapp/data/ca_trees", pattern = "\\.tif$", full.names = TRUE)
@@ -77,7 +80,7 @@ county_rasters <- setNames(
 )
 
 
-# 3a. Resample resolution to 60x60m resolution for all counties except Siskiyou 
+################ 3a. Resample resolution to 60x60m resolution for all counties except Siskiyou 
 
 for (i in seq_along(county_rasters)) {
   
@@ -92,7 +95,7 @@ for (i in seq_along(county_rasters)) {
 }
 
 
-# 3b. Resample resolution to 80x80m resolution for Siskiyou
+################ 3b. Resample resolution to 80x80m resolution for Siskiyou
 
 # read in Siskiyou
 rast_sisk <- rast("data/ca_trees/Siskiyou.tif")
