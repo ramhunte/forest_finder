@@ -64,7 +64,7 @@ for (i in 1:nrow(counts)) {
   county_name <- county$NAME
 
   # Create a directory to save the output rasters
-  output_dir <- "forest_finder/data/90x90"
+  output_dir <- "forest_finder/data/240x240"
 
   # Define the output file path with county name
   output_file <- file.path(output_dir, paste0(county_name, ".tif"))
@@ -77,7 +77,7 @@ for (i in 1:nrow(counts)) {
 
 # List all .tif files in the folder
 raster_files <- list.files(
-  "forest_finder/data/90x90", # 90x90 resolution files
+  "forest_finder/data/240x240", # 90x90 resolution files
   pattern = "\\.tif$",
   full.names = TRUE
 )
@@ -90,22 +90,21 @@ county_rasters <- setNames(
 
 ################ 3a. Resample resolution to 60x60m resolution for all counties except Siskiyou
 
-# for (i in seq_along(county_rasters)) {
-#   # if (names(county_rasters[i] != "Siskiyou")) {
-#   # change their resolutions to 90x90
-#   # Aggregate the raster from 30m to 90m resolution
-#   aggregated_rast <- aggregate(county_rasters[[i]], fact = 3, fun = "modal") # fact = 2 for doubling the cell size (30m to 60m)
-#
-#   # Write the aggregated raster back to the same filename
-#   writeRaster(
-#     aggregated_rast,
-#     filename = sources(county_rasters[[i]]),
-#     overwrite = TRUE
-#   )
-#   # }
-# }
-#
-#
+for (i in seq_along(county_rasters)) {
+  # if (names(county_rasters[i] != "Siskiyou")) {
+  # change their resolutions to 240x240
+  # Aggregate the raster from 30m to 90m resolution
+  aggregated_rast <- aggregate(county_rasters[[i]], fact = 8, fun = "modal") # fact = 2 for doubling the cell size (30m to 60m)
+
+  # Write the aggregated raster back to the same filename
+  writeRaster(
+    aggregated_rast,
+    filename = sources(county_rasters[[i]]),
+    overwrite = TRUE
+  )
+  # }
+}
+
 # ################ 3b. Resample resolution to 80x80m resolution for Siskiyou
 #
 # # read in Siskiyou

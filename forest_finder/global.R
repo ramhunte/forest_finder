@@ -9,18 +9,19 @@ library(shinyjs)
 library(htmltools)
 #spatial tools
 library(terra)
+library(stars)
 library(sf)
 library(tigris)
 library(leaflet)
 library(leaflet.extras)
-# library(leafem)
+library(leafem)
 
 ### READ IN DATA
 
 # rasters ----
 # List all .tif files in the folder
 raster_files <- list.files(
-  "data/90x90",
+  "data/ca_trees",
   pattern = "\\.tif$",
   full.names = TRUE
 )

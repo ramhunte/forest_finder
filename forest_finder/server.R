@@ -57,10 +57,10 @@ server <- function(input, output, session) {
       addTiles() |> # base map is OSM
       setView(lng = -119.4179, lat = 36.7783, zoom = 6) |> # set original view on CA
       # addMouseCoordinates() |>
-      addScaleBar(
-        position = "bottomleft",
-        options = scaleBarOptions(imperial = FALSE)
-      ) |>
+      # addScaleBar(
+      #   position = "bottomleft",
+      #   options = scaleBarOptions(imperial = FALSE)
+      # ) |>
       # setting the size dimensions of the legend
       htmlwidgets::onRender(
         " 
