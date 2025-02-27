@@ -20,7 +20,7 @@ library(leaflet.extras)
 # rasters ----
 # List all .tif files in the folder
 raster_files <- list.files(
-  "data/ca_trees",
+  "data/90x90",
   pattern = "\\.tif$",
   full.names = TRUE
 )
