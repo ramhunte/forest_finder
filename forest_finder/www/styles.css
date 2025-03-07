@@ -181,6 +181,11 @@ color:#ffffff !important;
 }
 
 /* in text code */
+      #loading {
+        font-size: 500px; /* Adjust the size here */
+      }
+
+/* in text code */
 
 code {
   color: #01796F;

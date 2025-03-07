@@ -55,15 +55,14 @@ This legend and the forested area can both be hidden using the `Legend` and `Tre
 
 Data was collected by [Riley et a. 2021](https://www.fs.usda.gov/rds/archive/catalog/RDS-2021-0074), and all 
 rights to its collection and research are given to the original authors and the [United States Forest Service (USFS)](https://www.fs.usda.gov/). 
-All forested area raster pixels are shown at a 60mx60m resolution in EPSG 3857 with the exception of Siskiyou 
-county which is 80mx80m resolution. To read more about the original data set and related research, please see 
+All rasters are shown at a 60mx60m resolution in EPSG 3857 with the exception of large counties rendered in 90mx90m resolution (Fresno, Inyo, Kern, Lassen, Mono, Riverside, San Bernardino, Siskiyou). To read more about the original data set and related research, please see 
 attached publication details on the United States Department of Agriculture website [HERE](https://data.fs.usda.gov/geodata/rastergateway/treemap/index.php).
 
 <br> 
 
 ### Limitations
 
-- The original published raster data has a resolution of 30mx30m. I lowered the resolution to 60mx60m and 80mx80m to enhance the 
+- The original published raster data has a resolution of 30mx30m. I lowered the resolution to 60mx60m and 90mx90m to enhance the 
 user experience by decreasing render time. While detail is lost in the resampling, the overall trends and patterns in dominant forest type remain clear.
 
 - Forest Finder leverages data that was *predicted* by machine learning algorithms (ironically called *random forests*) by [researchers](https://www.fs.usda.gov/rds/archive/catalog/RDS-2021-0074) 

@@ -3,8 +3,6 @@ server <- function(input, output, session) {
   cnty <- reactive({
     # filter(counties_ca, NAME %in% input$selectCounty) # filter to selected counties
     counties_ca[counties_ca$NAME %in% input$selectCounty, ] # filter to selected counties
-
-    # st_transform(4326) # changing crs for cropping
   })
 
   # Reactive: County-specific bounding box ----
@@ -53,7 +51,7 @@ server <- function(input, output, session) {
 
   # Map Render ----
   output$mapOutput <- renderLeaflet({
-    leaflet() |> # creating a basemap
+    leaflet() |>
       addTiles() |> # base map is OSM
       setView(lng = -119.4179, lat = 36.7783, zoom = 6) |> # set original view on CA
       # addMouseCoordinates() |>
@@ -84,7 +82,7 @@ server <- function(input, output, session) {
   observeEvent(input$selectCounty, {
     new_choices <- legend |>
       filter(value %in% unique(values(county_rasters[[input$selectCounty]]))) |> # filter to just trees available in the chosen raster
-      arrange(label) |> # sorting and oulling the species name from the raster
+      arrange(label) |> # sorting and pulling the species name from the raster
       pull(label)
 
     # keep previously selected tree species selected in new county raster
@@ -105,6 +103,9 @@ server <- function(input, output, session) {
   previous_bbox <- reactiveVal(NULL)
 
   observeEvent(input$applyFilters, {
+    # Disable the button when the action starts
+    shinyjs::disable("applyFilters")
+
     shinyjs::showElement(id = 'loading') # Show a loading spinner when rendering
 
     proxy <- leafletProxy("mapOutput")
@@ -168,6 +169,9 @@ server <- function(input, output, session) {
     }
 
     shinyjs::hideElement(id = 'loading') # Hide the spinner
+
+    # Re-enable the button after the event is done
+    shinyjs::enable("applyFilters")
   })
 
   # Observe raster toggle ----
