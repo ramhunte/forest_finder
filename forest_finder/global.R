@@ -40,6 +40,8 @@ county_rasters <- setNames(
 )
 
 # california counties ----
-counties_ca <- counties(state = "California") |>
-  # transforming crs
-  st_transform(crs = 4326)
+counties_ca <- readRDS("data/counties_ca.RDS")
+
+# counties(state = "California") |>
+# # transforming crs
+# st_transform(crs = 4326)
