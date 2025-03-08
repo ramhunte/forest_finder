@@ -21,6 +21,9 @@ library(leafem)
 # raster legend ----
 legend <- read_rds("data/legend.RDS")
 
+# county tree species list ----
+spcs_list <- read_rds("data/spcs_list.RDS")
+
 # local data raster files ----
 
 # List all .tif files in the folder
@@ -37,7 +40,6 @@ county_rasters <- setNames(
 )
 
 # california counties ----
-
 counties_ca <- counties(state = "California") |>
   # transforming crs
   st_transform(crs = 4326)

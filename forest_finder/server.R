@@ -80,10 +80,7 @@ server <- function(input, output, session) {
 
   # Update Species Picker ----
   observeEvent(input$selectCounty, {
-    new_choices <- legend |>
-      filter(value %in% unique(values(county_rasters[[input$selectCounty]]))) |> # filter to just trees available in the chosen raster
-      arrange(label) |> # sorting and pulling the species name from the raster
-      pull(label)
+    new_choices <- spcs_list[[input$selectCounty]] # update list with county species
 
     # keep previously selected tree species selected in new county raster
     valid_species <- input$selectSpecies[input$selectSpecies %in% new_choices]
