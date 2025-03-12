@@ -1,7 +1,6 @@
 library(tidyverse)
 library(markdown)
-library(rmarkdown)
-library(aws.s3)
+# library(rmarkdown)
 # Shiny tools
 library(shiny)
 library(shinyWidgets)
@@ -11,7 +10,6 @@ library(htmltools)
 #spatial tools
 library(terra)
 library(sf)
-library(tigris)
 library(leaflet)
 library(leaflet.extras)
 library(leafem)
@@ -24,7 +22,7 @@ legend <- read_rds("data/legend.RDS")
 # county tree species list ----
 spcs_list <- read_rds("data/spcs_list.RDS")
 
-# local data raster files ----
+# raster files ----
 
 # List all .tif files in the folder
 raster_files <- list.files(
@@ -41,7 +39,3 @@ county_rasters <- setNames(
 
 # california counties ----
 counties_ca <- readRDS("data/counties_ca.RDS")
-
-# counties(state = "California") |>
-# # transforming crs
-# st_transform(crs = 4326)
