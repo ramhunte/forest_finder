@@ -31,7 +31,7 @@ that it wasn't yesterday. I hope that it can serve you well as it has for me.
 
 ### How to use it
 
-Forest Finder has a simple design to facilitate a user-friendly experience for people of all ages. A collapsible panel 
+Forest Finder has a simple design to facilitate a user-friendly experience. A collapsible panel 
 in the right hand corner on the *Interactive Map* page contains a series of widgets:
 
 - `County`: select a California county  
@@ -43,9 +43,9 @@ in the right hand corner on the *Interactive Map* page contains a series of widg
 <br>
 
 After selecting your filters of interest, click `Find` and the map will populate predicted 
-forested area (colored raster data) in that county by tree species/group inside of the county boundaries (red line vector data). 
+forested area (colored raster pixels) in that county by tree species/group inside of the county boundaries (red line). 
 A legend will populate in the lower left hand corner that will link the tree species/groups to the associated color on the map.
-This legend and the forested area can both be hidden using the `Legend` and `Trees` toggles. 
+This legend and the forested area can both be hidden using the `Legend` and `Trees` toggles. Furthermore, the `Basemap` type can be toggled to three different options.
 
 <br>
 
