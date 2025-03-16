@@ -42,17 +42,16 @@ it has for me.
 ├─ gitignore
 ├─ README.md
 ├─ cleaning                     # conatains data cleaning processes
-│  └─ raster_processing.R           # cropping, masking, and resampling raster data
-└─ myapp                        # folder containing all the app scripts
+│  └─ raster_processing.R          # cropping, masking, and resampling raster data
+└─ forest_finder                # folder containing all the app scripts
    ├─ data                         # see `cleaning/raster_processing.R` script to get data
-   │  └─ www                          # stores styles for app
    ├─ global.R                     # global functions for all of app
    ├─ images                       # conatins used images
    ├─ server.R                     # server
    ├─ ui.R                         # user interface
    ├─ text                         # contains text files 
    |  └─ about.md                     # about page text
-   └─ www                          # stores styles for app
+   └─ www                          # holds styles for app
       └─ styles.css
 ```
 
