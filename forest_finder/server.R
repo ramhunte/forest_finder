@@ -35,6 +35,7 @@ server <- function(input, output, session) {
   })
 
   # Reactive: Legend and colors ----
+
   # creating a legend from the raster values
   cnty_legend <- reactive({
     legend[legend$value %in% unique(values(cnty_rast())), ] |>
@@ -43,22 +44,50 @@ server <- function(input, output, session) {
       arrange(label)
   })
 
-  #
+  # reactive update color pal for legend
   factorPalRev <- reactive({
     # creating an ordered factor color pallet from the legend
     colorFactor(cnty_legend()$hex, domain = cnty_legend()$label, ordered = TRUE)
   })
 
-  # Map Render ----
+  # Initial Map Render ----
+
+  # initial map legend render of alameda county
+  alam_legend <- legend[legend$label %in% spcs_list[["Alameda"]], ] |>
+    arrange(label)
+
+  # initial map legend color pal of alameda
+  alam_factorPal <- colorFactor(
+    alam_legend$hex,
+    domain = alam_legend$label,
+    ordered = TRUE
+  )
+
+  # creating initial load of map
   output$mapOutput <- renderLeaflet({
     leaflet() |>
       addTiles() |> # base map is OSM
-      setView(lng = -119.4179, lat = 36.7783, zoom = 6) |> # set original view on CA
-      # addMouseCoordinates() |>
-      # addScaleBar(
-      #   position = "bottomleft",
-      #   options = scaleBarOptions(imperial = FALSE)
-      # ) |>
+      addPolygons(
+        # add new county lines
+        data = counties_ca[counties_ca$NAME %in% "Alameda", ],
+        color = "red",
+        weight = 2,
+        fillColor = "transparent"
+      ) |>
+      addRasterImage(
+        county_rasters[["Alameda"]],
+        opacity = 1,
+        project = FALSE,
+        group = "Raster Layer"
+      ) |>
+      addLegend(
+        pal = alam_factorPal,
+        values = factor(alam_legend$label, levels = alam_legend$label),
+        opacity = 1,
+        group = "Trees",
+        position = "bottomleft"
+      ) |>
+
       # setting the size dimensions of the legend
       htmlwidgets::onRender(
         " 

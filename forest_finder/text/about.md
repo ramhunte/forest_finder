@@ -54,7 +54,7 @@ This legend and the forested area can both be hidden using the `Legend` and `Tre
 
 
 Forest Finder leverages data that was *predicted* by machine learning algorithms (ironically called *random forests*) by [Riley et a. 2021](https://www.fs.usda.gov/rds/archive/catalog/RDS-2021-0074) 
-at the US Forest Service. They contain all rights to its collection and research are given to the original authors and the [United States Forest Service (USFS)](https://www.fs.usda.gov/). 
+at the US Forest Service. All rights to its collection are given to the original authors and the [United States Forest Service (USFS)](https://www.fs.usda.gov/). 
 All rasters are shown at a 60mx60m resolution in EPSG 3857 with the exception of large counties rendered in 90mx90m resolution (Fresno, Inyo, Kern, Lassen, Mono, Riverside, San Bernardino, Siskiyou). 
 To read more about the original data set and related research, please see attached publication details on the United States Department of Agriculture [website](https://data.fs.usda.gov/geodata/rastergateway/treemap/index.php).
 
