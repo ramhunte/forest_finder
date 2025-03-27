@@ -38,9 +38,8 @@ server <- function(input, output, session) {
 
   # creating a legend from the raster values
   cnty_legend <- reactive({
-    legend[legend$value %in% unique(values(cnty_rast())), ] |>
-      # legend |>
-      #   filter(value %in% unique(values(cnty_rast()))) |> # filter to only uniques tree values
+    # legend[legend$value %in% unique(values(cnty_rast())), ] |>
+    legend[legend$label %in% input$selectSpecies, ] |>
       arrange(label)
   })
 
@@ -52,14 +51,14 @@ server <- function(input, output, session) {
 
   # Initial Map Render ----
 
-  # initial map legend render of alameda county
-  alam_legend <- legend[legend$label %in% spcs_list[["Alameda"]], ] |>
+  # initial map legend render of Siskiyou county
+  sisk_legend <- legend[legend$label %in% spcs_list[["Siskiyou"]], ] |>
     arrange(label)
 
-  # initial map legend color pal of alameda
-  alam_factorPal <- colorFactor(
-    alam_legend$hex,
-    domain = alam_legend$label,
+  # initial map legend color pal of Siskiyou
+  sisk_factorPal <- colorFactor(
+    sisk_legend$hex,
+    domain = sisk_legend$label,
     ordered = TRUE
   )
 
@@ -69,20 +68,20 @@ server <- function(input, output, session) {
       addTiles() |> # base map is OSM
       addPolygons(
         # add new county lines
-        data = counties_ca[counties_ca$NAME %in% "Alameda", ],
+        data = counties_ca[counties_ca$NAME %in% "Siskiyou", ],
         color = "red",
         weight = 2,
         fillColor = "transparent"
       ) |>
       addRasterImage(
-        county_rasters[["Alameda"]],
+        county_rasters[["Siskiyou"]],
         opacity = 1,
         project = FALSE,
         group = "Raster Layer"
       ) |>
       addLegend(
-        pal = alam_factorPal,
-        values = factor(alam_legend$label, levels = alam_legend$label),
+        pal = sisk_factorPal,
+        values = factor(sisk_legend$label, levels = sisk_legend$label),
         opacity = 1,
         group = "Trees",
         position = "bottomleft"
@@ -90,20 +89,30 @@ server <- function(input, output, session) {
 
       # setting the size dimensions of the legend
       htmlwidgets::onRender(
-        " 
-        function(el, x) {
-          var style = document.createElement('style');
-          style.innerHTML = `
-            .leaflet .info {
-              max-height: 200px;
-              max-width: 200px;
-              overflow-y: auto;
-              overflow-x: auto;
-            }
-          `;
-          document.head.appendChild(style);
-        }
-      "
+        "
+  function(el, x) {
+    var style = document.createElement('style');
+    style.innerHTML = `
+      .leaflet .info {
+        max-height: 200px;
+        max-width: 200px;
+        overflow-y: auto;
+        overflow-x: auto;
+        white-space: nowrap; /* Prevents wrapping */
+      }
+    `;
+    document.head.appendChild(style);
+
+    // Prevent scrolling inside legend from zooming the map
+    
+    var legend = document.querySelector('.leaflet .info');
+    if (legend) {
+      legend.addEventListener('wheel', function(event) {
+        event.stopPropagation();
+      });
+    }
+  }
+  "
       )
   })
 

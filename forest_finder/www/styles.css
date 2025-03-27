@@ -117,14 +117,38 @@ a {
 }
 
 .dropdown-menu {
-      max-width: 200px; /* Adjust this width */
+    max-width: 300px;  /* Adjust this width */
+      }
+   
+.bootstrap-select .dropdown-menu.inner {
+    white-space: nowrap;  /* Prevents wrapping */
+    overflow-x: auto;  /* Enables horizontal scrolling */
 }
 
+/* selected dropdown highlight */
+.bootstrap-select .dropdown-menu.inner .dropdown-item {
+    display: block; 
+    width: max-content; /* Ensures highlight covers full label */
+    min-width: 155%; /* Ensures highlight extends even when scrolling */
+}    
+
+/* selected dropdown check mark */
+.bootstrap-select.show-tick .dropdown-menu .selected span.check-mark {
+    position: absolute;
+    display: inline-block;
+    right: -130px;
+    top: 5px;
+}
+
+      
+/* selected drop down color */
 .selected { 
 background-color:#01796F !important;
 color:#ffffff !important;
-  
+ max-width: 600px;
+
 } 
+
 
 /* deselect/select all button */
 .btn-group-sm>.btn, .btn-sm {
