@@ -142,7 +142,6 @@ ui <- navbarPage(
           inputId = "selectCounty",
           label = "County:",
           choices = sort(unique(counties_ca$NAME)),
-          selected = "Siskiyou",
           multiple = FALSE,
           pickerOptions(maxOptionsText = 1)
         ),

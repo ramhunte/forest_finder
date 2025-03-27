@@ -51,14 +51,14 @@ server <- function(input, output, session) {
 
   # Initial Map Render ----
 
-  # initial map legend render of Siskiyou county
-  sisk_legend <- legend[legend$label %in% spcs_list[["Siskiyou"]], ] |>
+  # initial map legend render of alameda county
+  ala_legend <- legend[legend$label %in% spcs_list[["Alameda"]], ] |>
     arrange(label)
 
-  # initial map legend color pal of Siskiyou
-  sisk_factorPal <- colorFactor(
-    sisk_legend$hex,
-    domain = sisk_legend$label,
+  # initial map legend color pal of Alameda
+  ala_factorPal <- colorFactor(
+    ala_legend$hex,
+    domain = ala_legend$label,
     ordered = TRUE
   )
 
@@ -68,20 +68,20 @@ server <- function(input, output, session) {
       addTiles() |> # base map is OSM
       addPolygons(
         # add new county lines
-        data = counties_ca[counties_ca$NAME %in% "Siskiyou", ],
+        data = counties_ca[counties_ca$NAME %in% "Alameda", ],
         color = "red",
         weight = 2,
         fillColor = "transparent"
       ) |>
       addRasterImage(
-        county_rasters[["Siskiyou"]],
+        county_rasters[["Alameda"]],
         opacity = 1,
         project = FALSE,
         group = "Raster Layer"
       ) |>
       addLegend(
-        pal = sisk_factorPal,
-        values = factor(sisk_legend$label, levels = sisk_legend$label),
+        pal = ala_factorPal,
+        values = factor(ala_legend$label, levels = ala_legend$label),
         opacity = 1,
         group = "Trees",
         position = "bottomleft"
