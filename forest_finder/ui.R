@@ -182,7 +182,8 @@ ui <- navbarPage(
             value = TRUE
           )
         ),
-        actionButton(inputId = "applyFilters", label = "Find")
+        actionButton(inputId = "applyFilters", label = "Find"),
+        downloadButton("downloadData", "")
       )
     ), # END absolute Panel
 

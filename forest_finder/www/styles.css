@@ -191,6 +191,17 @@ color:#ffffff !important;
   display: block; margin: 0 auto;
 }
 
+/* download botton */
+.btn-default {
+    color: #01796F;
+    background-color: #fff;
+}
+
+.btn-default:hover {
+  color: #01796F;          /* Keeps the text color the same */
+  background-color: #fff;  /* Keeps the background color the same */
+}
+
 /* x mark in checkbox */
 .pretty input:checked~.state.p-primary-o .icon {
   color: #355E3B!important;

@@ -209,6 +209,58 @@ server <- function(input, output, session) {
     shinyjs::enable("applyFilters")
   })
 
+  # download a copy of the raster ----
+
+  output$downloadData <- downloadHandler(
+    filename = function() {
+      paste0(input$selectCounty, "_raster.zip") # Zip file name
+    },
+    content = function(file) {
+      # Create a temporary directory just for the files you want to zip
+      temp_folder <- tempdir() # Use a direct temp directory, no extra subfolder
+      # Create individual file paths for the .tif and .aux.xml
+      tif_file <- file.path(temp_folder, paste0(input$selectCounty, ".tif"))
+      xml_file <- paste0(tif_file, ".aux.xml") # Expected XML file
+
+      # Write the raster file to the temporary folder
+      writeRaster(
+        county_rasters[[input$selectCounty]],
+        tif_file,
+        overwrite = TRUE,
+        datatype = "INT2S"
+      )
+
+      # Check if the XML file was created
+      if (!file.exists(xml_file)) {
+        warning("XML metadata file was not generated!")
+      }
+
+      # Create the zip file containing just the .tif and .aux.xml
+      zip_file <- file.path(
+        temp_folder,
+        paste0(input$selectCounty, "_raster.zip")
+      )
+
+      # Clean up any existing zip before adding new content
+      if (file.exists(zip_file)) {
+        unlink(zip_file)
+      }
+
+      # Change directory to temp_folder to avoid including the full path in the zip
+      setwd(temp_folder)
+
+      # Use the zip command without directories (use the -j option)
+      zip(zip_file, c(basename(tif_file), basename(xml_file)))
+
+      # Copy the zip file to the target location
+      file.copy(zip_file, file)
+
+      # Clean up by removing the temporary files
+      unlink(c(tif_file, xml_file), recursive = TRUE)
+    },
+    contentType = "application/zip"
+  ) # END downloadHandler
+
   # Observe raster toggle ----
   # Observe the toggle button for raster visibility
   observeEvent(input$toggleRaster, {
