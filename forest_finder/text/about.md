@@ -47,7 +47,7 @@ forested area (colored raster pixels) in that county by tree species/group insid
 A legend will populate in the lower left hand corner that will link the tree species/groups to the associated color on the map.
 This legend and the forested area can both be hidden using the `Legend` and `Trees` toggles. Furthermore, the `Basemap` type can 
 be toggled to three different options. After a county raster with select species is mapped using the `Find` button, it can be downloaded 
-as a *.tif* file by clicking the download symbol below.
+as a *.tif* file by clicking the download symbol at the bottom left corner of the panel.
 
 <br>
 
